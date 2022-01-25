@@ -4,7 +4,8 @@
   "description": "TTP finale project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "author": "Tiego Ouedraogo",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "mongoose": "^6.1.8",
     "mongoose-currency": "^0.2.0",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
