@@ -8,48 +8,75 @@ const Currency = mongoose.Types.Currency;
 
 const cart_items = new Schema(
   {
-    name: {
+    key: {
       type: String,
       require: true,
       unique: true,
+    },
+
+    date_added: {
+      type: String,
+      require: true,
+    },
+
+    date_updated: {
+      type: String,
+      require: true,
+    },
+
+    purchased: {
+      type: Boolean,
+      default: false,
+      
+    },
+
+    prod_id: {
+      type: String,
+      require: true,
+    },
+
+    prod_name: {
+      type: String,
+      require: true,
+    },
+
+    prod_quantity: {
+      type: String,
+      require: true,
+    },
+
+    rating: {
+      type: String,
+      require: true,
     },
 
     description: {
       type: String,
-      unique: true,
-    },
-
-    image: {
-      type: String,
       require: true,
     },
 
-    category: {
-      type: String,
+    aisle_location: {
+      type: Number,
       require: true,
-    },
-
-    label: {
-      type: String,
-      default: " ",
     },
 
     price: {
-      type: Currency,
+      type: Float32Array,
       require: true,
-      min: 0,
     },
 
-    featured: {
-      type: Boolean,
-      default: false,
+    unit_shipping: {
+      type: Float32Array,
+      require: true,
     },
 
-    comments: [commentSchema],
+    shipping: {
+      type: Float32Array,
+      require: true,
+    },
+
   },
-  {
-    timestamps: true,
-  }
+  
 );
 //constructing the model for the schema
 let Itemes = mongoose.model("Item", cart_items);
