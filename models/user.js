@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize')
-const db = require("./database")
+const db = require("./db")
 
 
-const Student = db.define('student', {
+const User = db.define('user', {
     firstName: {
         type: DataTypes.STRING(50),
         allowNull: false,
@@ -44,4 +44,4 @@ const Student = db.define('student', {
     freezeTableName: true
 })
 
-module.exports = Student
+module.exports = User
