@@ -44,14 +44,35 @@ const Username = db.define('username', {
         type: DataTypes.STRING(2048),
         defaultValue: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
     },
-    gpa: {
-        type: DataTypes.DECIMAL(3, 2),
-        allowNull: true,
+    address: {
+        type: DataTypes.STRING(2048),
         validate: {
-            min: 0,
-            max: 4
+            notEmpty: true,
+            notNull: true
         }
-    }
+    },
+    zipcode: {
+        type: DataTypes.STRING(2048),
+        validate: {
+            notEmpty: true,
+            notNull: true
+        }
+    },
+    city: {
+        type: DataTypes.STRING(2048),
+        validate: {
+            notEmpty: true,
+            notNull: true
+        }
+    },
+    country: {
+        type: DataTypes.STRING(2048),
+        validate: {
+            notEmpty: true,
+            notNull: true
+        }
+    },
+
 }, {
     freezeTableName: true
 })
