@@ -1,84 +1,60 @@
 const { DataTypes } = require('sequelize')
 const db = require("./db")
 
-const cart_items = db.define('cart_items', {
-           key: {
-            type: DataTypes.STRING,
-              type: String,
-              require: true,
-              unique: true,
-            },
-        
-            date_added: {
-              type: DataTypes.STRING,
-              type: String,
-              require: true,
-            },
-        
-            date_updated: {
-              type: DataTypes.STRING,
-              type: String,
-              require: true,
-            },
-        
+const Cart_items = db.define('cart_items', {
             purchased: {
-              type: DataTypes.STRING,
-              type: Boolean,
+              type: DataTypes.BOOLEAN,
+
               default: false,
-              
             },
         
             prod_id: {
               type: DataTypes.STRING,
-              type: String,
+
               require: true,
             },
         
             prod_name: {
               type: DataTypes.STRING,
-              type: String,
+
               require: true,
             },
         
             prod_quantity: {
               type: DataTypes.STRING,
-              type: String,
+
               require: true,
             },
         
             rating: {
               type: DataTypes.STRING,
-              type: String,
+
               require: true,
             },
         
             description: {
               type: DataTypes.STRING,
-              type: String,
+
               require: true,
             },
         
             aisle_location: {
-              type: DataTypes.STRING,
-              type: Number,
+              type: DataTypes.INTEGER,
               require: true,
             },
         
             price: {
-              type: DataTypes.STRING,
-              type: Float32Array,
+              type: DataTypes.DECIMAL(6, 2),
               require: true,
             },
         
             unit_shipping: {
               type: DataTypes.STRING,
-              type: Float32Array,
               require: true,
             },
         
             shipping: {
-              type: DataTypes.STRING,
-              type: Float32Array,
+              type: DataTypes.DECIMAL(6, 2),
               require: true,
             },
 
@@ -86,4 +62,4 @@ const cart_items = db.define('cart_items', {
     freezeTableName: true
 })
 
-module.exports = cart_items
+module.exports = Cart_items

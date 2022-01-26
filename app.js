@@ -14,7 +14,7 @@ app.use(morgan("dev"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-
+app.use('/routes', require('./routes'))
 
 db.sync({force: true}).then(() => {
     console.log("Database synced")
