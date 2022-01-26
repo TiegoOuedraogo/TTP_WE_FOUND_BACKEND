@@ -1,100 +1,124 @@
-const createError = require("http-errors");
-const express = require("express");
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const config =require('./config')
+// const express = require("express");
+// const http = require("http");
+// const morgan = require("morgan");
+// const bodyParser = require("body-parser");
 
 
-const bodyParser = require('body-parser')
-const session = require('express-session'); 
-const FileStore = require('session-file-store')(session); 
-const passport= require('passport');
-const authenticate = require('./authentication');
+// const app = express();
+// const db = require('./models/index');
 
-const url = require('./config')
-function auth (req, res, next) {
-  console.log(req.headers);
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-      const err = new Error('You are not authenticated!');
-      res.setHeader('WWW-Authenticate', 'Basic');
-      err.status = 401;
-      next(err);
-      return;
-  }
-
-  const auth = new Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
-  const user = auth[0];
-  const pass = auth[1];
-  if (user == 'admin' && pass == 'password') {
-      next(); // authorized
-  } else {
-      const err = new Error('You are not authenticated!');
-      res.setHeader('WWW-Authenticate', 'Basic');      
-      err.status = 401;
-      next(err);
-  }
-}
-
-app.use(auth);
-const indexRouter = require("./Capstone/index");
-const usersRouter = require("./Capstone/Server/routes/users");
-const cartIems = require("./Capstone/Server/routes/CartIems");
+// app.use(express.json());
+// app.use(morgan("dev"));
+// app.use(bodyParser.json());
+// app.use(express.static(__dirname + "/public"));
+// app.use((req, res, next) => {
+//   res.statusCode = 200;
+//   res.setHeader("content-type", "text/html");
+//   res.end("<thml><body><h1>This is an express server</h1></body></html>");
+// });
+// // app.use((req, res, next) => {
+// //     res.setHeader('Access-Control-Allow-Origin', '*');
+// //     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+// //     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+// //     next();
+// // });
 
 
-const mongoose = require("mongoose");
+// const port = process.env.PORT;
+// if (port == null || port == "") {
+//   port = 8080;
+// }
 
-const app = express();
+// sequelize.sync()
+//   .then(result => {
+//     console.log(result);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+// app.all("/items", (req, res, next) => {
+//   res.statusCode = 200;
+//   next();
+// });
+
+// app.get("/items", (req, res, next) => {
+//   res.end("We will send all the items to you now!");
+// });
+
+// app.post("/items", (req, res, next) => {
+//   res.end(
+//     "I will add the items ",
+//     +req.body.name + "with details " + req.body.description
+//   );
+// });
+
+// app.put("/items", (req, res, next) => {
+//   res.statusCode = 403; //not supported code
+//   res.end("PUT opertions not supported on items ");
+// });
+
+// app.delete("/items", (req, res, next) => {
+//   res.end("Deleting all the item to you now!");
+// });
+
+// app.get("/items/:itemId", (req, res, next) => {
+//   res.end(
+//     "We will send details of item " +
+//       req.params.itemId +
+//       " to you now!"
+//   );
+// });
+
+// app.post("/items/:itemId", (req, res, next) => {
+//   res.statusCode = 403; //not supported code
+//   res.end("POST opertions not supported on items/ " + req.params.itemId);
+// });
+
+// app.put("/items/:itemId", (req, res, next) => {
+//   res.write("we are updating the item: " + req.params.itemId, "\n");
+//   res.end(
+//     "We will update the item " +
+//       req.body.name +
+//       "  with details " +
+//       req.body.description
+//   );
+// });
+
+// app.delete("/items/:itemId", (req, res, next) => {
+//   res.end("Deleting the item:" + req.params.itemId + " now!");
+// });
 
 
-//connection with the server
-// const url = "mongodb://localhost:27017/conFusion";
 
-//new from the config file
-const url = config.mongoUrl;
-const connect = mongoose.connect(url);
-connect.then(
-  (db) => {
-    console.log("succefully connected to the server");
-  },
-  (err) => {
-    console.log(err);
-  }
-);
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(passport.initialize());
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+const express = require("express")
+const cors = require("cors")
+const morgan = require("morgan");
+const db =require('./models/db')
 
-//static use in the public folder
-app.use(express.static(path.join(__dirname, "public")));
 
-//mountain
-app.use("/items", itemRouter);
+const app = express()
+const PORT = 8080
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+app.use(cors())
+app.use(morgan("dev"))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
-});
 
-module.exports = app;
+
+// db.sync({force: true}).then(() => {
+//     console.log("Database synced")
+//     app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
+// })
+
+db.sync({force:true}).then(()=>{
+  console.log('dataabse sync', )
+  const server = http.createServer(app);
+  server.listen(port, holstname, () => {
+    console.log(`Server running at http://${holstname}:${port}`);
+  });
+})
