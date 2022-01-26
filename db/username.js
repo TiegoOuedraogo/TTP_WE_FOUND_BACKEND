@@ -1,8 +1,20 @@
 const { DataTypes } = require('sequelize')
-const db = require("./db")
+const db = require("./database")
 
 
-const User = db.define('user', {
+const Username = db.define('username', {
+
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+            model: 'username',
+            key: 'id'
+        }
+    },
+
     firstName: {
         type: DataTypes.STRING(50),
         allowNull: false,
@@ -44,4 +56,4 @@ const User = db.define('user', {
     freezeTableName: true
 })
 
-module.exports = User
+module.exports = Username
