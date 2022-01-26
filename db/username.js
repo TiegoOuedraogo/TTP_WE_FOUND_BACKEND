@@ -46,6 +46,7 @@ const Username = db.define('username', {
     },
     address: {
         type: DataTypes.STRING(2048),
+        allowNull: false,
         validate: {
             notEmpty: true,
             notNull: true
@@ -53,6 +54,7 @@ const Username = db.define('username', {
     },
     zipcode: {
         type: DataTypes.STRING(2048),
+        allowNull: false,
         validate: {
             notEmpty: true,
             notNull: true
@@ -60,6 +62,7 @@ const Username = db.define('username', {
     },
     city: {
         type: DataTypes.STRING(2048),
+        allowNull: false,
         validate: {
             notEmpty: true,
             notNull: true
@@ -67,6 +70,7 @@ const Username = db.define('username', {
     },
     country: {
         type: DataTypes.STRING(2048),
+        allowNull: false,
         validate: {
             notEmpty: true,
             notNull: true
