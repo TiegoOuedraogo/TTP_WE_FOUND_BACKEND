@@ -24,26 +24,6 @@ router.get("/:id", async (req, res) => {
     }
 })
 
-/*
-const settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://api.kroger.com/v1/cart/add",
-  "method": "PUT",
-  "headers": {
-    "Accept": "application/json",
-    "Authorization": "Bearer {{TOKEN}}",
-  },
-  "processData": false,
-  "data": "{\n  \"items\": [\n     {\n       \"upc\": \"0001200016268\",\n       \"quantity\": \2\\n      }\n    ]\n }"
-}
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-
-* */
-
 //get single cart_items based on id with its users
 router.get("/:id/users", async (req, res) => {
     try {

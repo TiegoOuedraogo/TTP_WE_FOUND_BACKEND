@@ -4,6 +4,7 @@ const cors = require("cors")
 const morgan = require("morgan");
 const { db } = require('./db/index')
 
+
 const app = express()
 const PORT = 8080
 
@@ -13,6 +14,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use('/api', require('./api'))
+
 
 db.sync({force: true}).then(() => {
     console.log("Database synced")
