@@ -1,5 +1,8 @@
 const router = require('express').Router();
 const {Items} = require("../db");
+const {DataTypes} = require("sequelize");
+const orders = require('express')
+
 router.get("/", async (req, res) => {
 
     try {
@@ -12,7 +15,7 @@ router.get("/", async (req, res) => {
             zip: {type: String, required: true},
         })
 
-        res.sendStatus(201).send(item)
+        res.sendStatus(201).send(shippingInfo)
     } catch (error) {
         console.log(error)
         res.status(404).send(error)
@@ -31,25 +34,26 @@ router.get("/", async (req, res) => {
             image: {type: String, required: true},
             price: {type: String, required: true},
             _id: {
-                type: mongoose.Schema.Types.ObjectId,
+                type: DataTypes,
                 ref: 'Product',
                 required: true
             },
         });
-      res.sendStatus(201).send(item)
+      res.sendStatus(201).send(orderItem)
 } catch (error) {
     console.log(error)
     res.status(404).send(error)
 }
 })
+
 router.get("/", async (req, res) => {
     try{
     const ordered = await Items.create({
         user: {
-            type:Types.ObjectId,
+            type: DataTypes,
             ref: 'User',
             required: true},
-        orderItems: [orderItem],
+        orderItems: ordered,
         shipping: shippingInfo,
         payment: paymentInfo,
         paymentResult: {
@@ -69,10 +73,11 @@ router.get("/", async (req, res) => {
     }, {
         timestamps: true
     })
-        res.sendStatus(201).send(item)
+        res.sendStatus(201).send(ordered)
     } catch (error) {
         console.log(error)
         res.status(404).send(error)
     }
 })
-module.exports = {orderModel}
+
+module.exports = orders;
