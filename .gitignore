@@ -1,7 +1,6 @@
 node_modules
 config
-.idea
-.env
 package-lock.json
 package.json
-
+.idea
+.env
