@@ -9,7 +9,7 @@ const database = new Sequelize(
         dialect: "postgres",
         ssl: {
         require: true,
-            "rejectUnauthorized": false
+            rejectUnauthorized: false
         }
     },
 
