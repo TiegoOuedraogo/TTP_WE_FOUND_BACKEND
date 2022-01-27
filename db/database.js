@@ -5,15 +5,15 @@ const database = new Sequelize(
     {
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
-        logging: false
-    }, {
-        "dialectOptions": {
-            "ssl": {
-                "require": true,
-                "rejectUnauthorized": false
-            }
+        logging: false,
+        dialect: "postgres",
+        ssl: {
+        require: true,
+            "rejectUnauthorized": false
         }
-    }
+    },
+
+
 );
 
 module.exports = database
