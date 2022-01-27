@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 const db = require("./database")
 
 
-const WeFoundUser = db.define('we_found_users', {
+const WeFoundUser = db.define('weFoundUsers', {
 
     firstName: {
         type: DataTypes.STRING(50),

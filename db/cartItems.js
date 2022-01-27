@@ -1,27 +1,27 @@
 const { DataTypes } = require('sequelize')
 const db = require("./database")
 
-const CartItems = db.define('cart_items', {
+const CartItems = db.define('cartItems', {
 
         purchased: {
             type: DataTypes.BOOLEAN,
-            default: false,
+            defaultValue: false,
         },
 
         quantity: {
             type: DataTypes.INTEGER,
-            default: 1
+            defaultValue: 1
         },
 
-        product_id: {
-          type: DataTypes.INTEGER,
+        productId: {
+          type: DataTypes.STRING(50),
         },
 
         upc: {
-          type: DataTypes.INTEGER,
+          type: DataTypes.STRING(50),
         },
 
-        aisle_locations: {
+        aisleLocations: {
           type: DataTypes.ARRAY(DataTypes.JSONB),
         },
 
@@ -33,7 +33,7 @@ const CartItems = db.define('cart_items', {
           type: DataTypes.ARRAY(DataTypes.STRING(50)),
         },
 
-        country_origin: {
+        countryOrigin: {
           type: DataTypes.STRING(100),
         },
 
@@ -45,11 +45,11 @@ const CartItems = db.define('cart_items', {
             type: DataTypes.ARRAY(DataTypes.JSONB),
         },
 
-        item_info: {
+        items: {
             type: DataTypes.ARRAY(DataTypes.JSONB),
         },
 
-        item_dimensions: {
+        itemInformation: {
             type: DataTypes.JSONB,
         },
 

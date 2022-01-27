@@ -24,18 +24,18 @@ router.get("/:id",async (req,res) => {
 })
 
 //get single user based on id with its cart_items
-router.get("/:id/cart_items", async (req, res) => {
+router.get("/:id/cartItems", async (req, res) => {
     try {
         const user = await WeFoundUser.findByPk(req.params.id);
-        const cart_items = await cart_items.findOne({
+        const cartItems = await CartItem.findOne({
             where: {
-                id: user.getDataValue("cart_itemsId")
+                weFoundUserId: req.params.id
             }
         })
 
         res.status(200).json({
             user,
-            cart_items
+            cartItems
         })
 
     } catch(error) {
@@ -64,7 +64,9 @@ router.patch("/:id",async (req,res) => {
                 id: req.params.id
             }
         })
-        res.status(200).send()
+        res.status(200).send({
+            success: "User updated successfully. If you don't see a change, check to see you're changing the right attribute."
+        })
     } catch(error){
         console.log(error)
         res.status(404).send(error)
@@ -74,7 +76,7 @@ router.patch("/:id",async (req,res) => {
 router.delete("/:id", async (req, res) => {
     try {
         const user = await WeFoundUser.findByPk(req.params.id)
-        user.destroy()
+        user.destroy().then(() => "Deletion successful.")
         res.status(200).send(`Deleted user with ID of ${req.params.id}`)
     } catch (error) {
         console.log(error)
