@@ -53,7 +53,10 @@ router.get('/products', async(req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).send({
+            error: "An error occurred attempting to communicate with the Kroger API. Check your request URL for errors. " +
+                "If this takes you more than five minutes, contact your API technical support specialist."
+        })
     }
 })
 
@@ -85,7 +88,10 @@ router.get('/products/:id', async(req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).send({
+            error: "An error occurred attempting to communicate with the Kroger API. Check your request URL for errors. " +
+                "If this takes you more than five minutes, contact your API technical support specialist."
+        })
     }
 })
 
@@ -133,7 +139,8 @@ router.get('/locations', async(req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).send({
-            error: "An error occurred attempting to communicate with the Kroger API. " +
+            error: "An error occurred attempting to communicate with the Kroger API. Check your request URL for errors. " +
+                "If this takes you more than five minutes, contact your API technical support specialist. " +
                 "Please note: You must include a zipcode, latlong, or latNear & lonNear as query parameters. "  +
                 "See the Kroger API documentation for more information: https://developer.kroger.com/reference/#operation/SearchLocations",
         })
@@ -162,7 +169,10 @@ router.get('/locations/:id', async(req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.status(500).send(error)
+        res.status(500).send({
+            error: "An error occurred attempting to communicate with the Kroger API. Check your request URL for errors. " +
+                "If this takes you more than five minutes, contact your API technical support specialist."
+        })
     }
 })
 
