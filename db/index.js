@@ -1,15 +1,15 @@
 const db = require("./database")
-const Items = require("./items")
-const Username = require("./username")
+const CartItems = require("./cartItems")
+const WeFoundUser = require("./weFoundUsers")
 
 
-Username.hasMany(Items)
-Items.belongsTo(Username)
+WeFoundUser.hasMany(CartItems)
+CartItems.belongsTo(WeFoundUser)
 
 
 module.exports = {
     db,
-    Items,
-    Username,
+    CartItems,
+    WeFoundUser,
 
 }
