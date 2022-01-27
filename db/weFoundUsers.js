@@ -47,6 +47,10 @@ const WeFoundUser = db.define('we_found_users', {
         type: DataTypes.STRING(2048),
     },
 
+    state: {
+        type: DataTypes.STRING(100),
+    },
+
     country: {
         type: DataTypes.STRING(2048),
     },
