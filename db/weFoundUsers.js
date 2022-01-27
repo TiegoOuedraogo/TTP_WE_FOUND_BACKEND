@@ -22,6 +22,15 @@ const WeFoundUser = db.define('weFoundUsers', {
         }
     },
 
+    firstName: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            notNull: true
+        }
+    },
+
     lastName: {
         type: DataTypes.STRING(50),
         allowNull: false,

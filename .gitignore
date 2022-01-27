@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 node_modules
 .env
 .idea
 
+=======
+.idea/
+>>>>>>> 1a754334a4364efcf2afc88f7113520c4e7cde03
