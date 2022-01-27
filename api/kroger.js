@@ -1,6 +1,6 @@
 const router = require("express").Router()
-const Cart = require("../db/items")
-const User = require("../db/username")
+const CartItem = require("../db/cartItems")
+const WeFoundUser = require("../db/weFoundUsers")
 
 const Axios = require("axios")
 const oauth = require("axios-oauth-client")

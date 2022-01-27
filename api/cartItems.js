@@ -1,11 +1,10 @@
 const router = require("express").Router()
-const Cart = require("../db/items")
-const User = require("../db/username")
-const {Items} = require("../db");
+const CartItem = require("../db/cartItems")
+const WeFoundUser = require("../db/weFoundUsers")
 
 router.get("/", async (req, res) => {
     try {
-        const cart_items = await Cart.findAll()
+        const cart_items = await CartItem.findAll()
         res.status(200).send(cart_items)
     } catch (error) {
         console.log(error)
@@ -16,7 +15,7 @@ router.get("/", async (req, res) => {
 //get single cart_items based on id
 router.get("/:id", async (req, res) => {
     try {
-        const cart_items = await Cart.findByPk(req.params.id);
+        const cart_items = await CartItem.findByPk(req.params.id);
         res.status(200).json(cart_items);
     } catch(error) {
         console.log(error)
@@ -27,8 +26,8 @@ router.get("/:id", async (req, res) => {
 //get single cart_items based on id with its users
 router.get("/:id/users", async (req, res) => {
     try {
-        const cart_items = await Cart.findByPk(req.params.id);
-        const user = await User.findAll({
+        const cart_items = await CartItem.findByPk(req.params.id);
+        const user = await WeFoundUser.findAll({
             where: {
                 cart_itemsId: req.params.id
             }
@@ -50,7 +49,7 @@ router.post("/", async (req, res) => {
 
     try {
 
-        const item = await  Items.create({
+        const item = await  CartItem.create({
             name: req.body.name,
             price: req.body.price,
             image: req.body.image,
@@ -72,7 +71,7 @@ router.patch("/:id",async (req,res) => {
     try{
 
         console.log(req.body)
-        await Cart.update(req.body, {
+        await CartItem.update(req.body, {
             where: {
                 id: req.params.id
             }
@@ -87,7 +86,7 @@ router.patch("/:id",async (req,res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-        const cart_items = await Cart.findByPk(req.params.id)
+        const cart_items = await CartItem.findByPk(req.params.id)
         await cart_items.destroy()
         res.status(200).send(`Deleted cart_items with ID of ${req.params.id}`)
     } catch (error) {
