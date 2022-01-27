@@ -10,5 +10,6 @@ Items.belongsTo(Username)
 module.exports = {
     db,
     Items,
-    Username
+    Username,
+
 }
