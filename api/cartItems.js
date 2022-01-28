@@ -10,7 +10,7 @@ router.post("/", auth, async (req, res) => {
         res.status(201).send(item)
     } catch (error) {
         console.log(error)
-        res.status(404).send(error)
+        res.status(401).send(error)
     }
 })
 

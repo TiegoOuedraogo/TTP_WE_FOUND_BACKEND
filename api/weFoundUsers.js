@@ -30,7 +30,7 @@ router.get("/:id", auth, async (req,res) => {
 router.get("/:id/cartItems", auth, async (req, res) => {
     try {
         const user = await WeFoundUser.findByPk(req.params.id);
-        const cartItems = await CartItem.findOne({
+        const cartItems = await CartItem.findAll({
             where: {
                 weFoundUserId: req.params.id
             }
