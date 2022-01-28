@@ -54,15 +54,15 @@ const WeFoundUser = db.define('weFoundUsers', {
     },
 
     street_address: {
-        type: DataTypes.STRING(2048),
+        type: DataTypes.STRING(100),
     },
 
     zipcode: {
-        type: DataTypes.STRING(2048),
+        type: DataTypes.STRING(20),
     },
 
     city: {
-        type: DataTypes.STRING(2048),
+        type: DataTypes.STRING(100),
     },
 
     state: {
@@ -70,7 +70,7 @@ const WeFoundUser = db.define('weFoundUsers', {
     },
 
     country: {
-        type: DataTypes.STRING(2048),
+        type: DataTypes.STRING(100),
     },
 
     dark_mode: {
