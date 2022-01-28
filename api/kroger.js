@@ -1,6 +1,7 @@
 const router = require("express").Router()
 const CartItem = require("../db/cartItems")
 const WeFoundUser = require("../db/weFoundUsers")
+const auth = require("../middleware/auth")
 
 const Axios = require("axios")
 const oauth = require("axios-oauth-client")
@@ -24,7 +25,7 @@ router.get('/', async(req, res) => {
 /////////////////////////////////////////////////////////////////////
 
 
-router.get('/products', async(req, res) => {
+router.get('/products', auth, async(req, res) => {
     try {
         console.log(req.query)
 
@@ -60,7 +61,7 @@ router.get('/products', async(req, res) => {
     }
 })
 
-router.get('/products/:id', async(req, res) => {
+router.get('/products/:id', auth, async(req, res) => {
     try {
         console.log(req.query)
         console.log(req.params)
@@ -95,7 +96,7 @@ router.get('/products/:id', async(req, res) => {
     }
 })
 
-router.get('/locations', async(req, res) => {
+router.get('/locations', auth, async(req, res) => {
     try {
         console.log(req.query)
 
@@ -147,7 +148,7 @@ router.get('/locations', async(req, res) => {
     }
 })
 
-router.get('/locations/:id', async(req, res) => {
+router.get('/locations/:id', auth, async(req, res) => {
     try {
         console.log(req.query)
         console.log(req.params)

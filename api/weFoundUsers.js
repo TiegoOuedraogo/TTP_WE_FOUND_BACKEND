@@ -16,7 +16,7 @@ router.get("/", auth, async (req, res) => {
 })
 
 //get user based on id
-router.get("/:id",async (req,res) => {
+router.get("/:id", auth, async (req,res) => {
     try{
         const user = await WeFoundUser.findByPk(req.params.id);
         res.status(200).json(user);
@@ -27,7 +27,7 @@ router.get("/:id",async (req,res) => {
 })
 
 //get single user based on id with its cart_items
-router.get("/:id/cartItems", async (req, res) => {
+router.get("/:id/cartItems", auth, async (req, res) => {
     try {
         const user = await WeFoundUser.findByPk(req.params.id);
         const cartItems = await CartItem.findOne({
@@ -48,25 +48,23 @@ router.get("/:id/cartItems", async (req, res) => {
 })
 
 
-router.post("/", async (req, res) => {
-    try {
-        console.log(req.body)
-        const user = await WeFoundUser.create(req.body)
-        const token = jwt
-        res.status(201).send(user)
-    } catch (error) {
-        console.log(error)
-        res.status(404).send(error)
-    }
-})
+// router.post("/", async (req, res) => {
+//     try {
+//         console.log(req.body)
+//         const user = await WeFoundUser.create(req.body)
+//         const token = jwt
+//         res.status(201).send(user)
+//     } catch (error) {
+//         console.log(error)
+//         res.status(404).send(error)
+//     }
+// })
 
 
 router.post("/signup", async (req, res) => {
     try {
         const superId = nanoid()
-        // console.log(superId)
         const token = jwt.sign({superId: superId.toString()}, "ihopethisworks")
-        // console.log(token)
         const user = await WeFoundUser.create({
             ...req.body,
             superId,
@@ -74,9 +72,6 @@ router.post("/signup", async (req, res) => {
                 token
             }]
         })
-
-        // const decoded = jwt.verify(token, "ihopethisworks")
-        // console.log(decoded)
 
         res.status(201).send({
             message: "Successfully signed up",
@@ -150,7 +145,7 @@ router.post("/logoutAll", auth, async(req, res) => {
 })
 
 
-router.patch("/:id",async (req,res) => {
+router.patch("/:id", auth, async (req,res) => {
     try{
         console.log(req.body)
         await WeFoundUser.update(req.body, {
@@ -167,7 +162,7 @@ router.patch("/:id",async (req,res) => {
     }
 })
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
     try {
         const user = await WeFoundUser.findByPk(req.params.id)
         user.destroy().then(() => "Deletion successful.")

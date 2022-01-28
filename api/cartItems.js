@@ -1,8 +1,9 @@
 const router = require("express").Router()
 const CartItem = require("../db/cartItems")
 const WeFoundUser = require("../db/weFoundUsers")
+const auth = require("../middleware/auth")
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
 
     try {
         const item = await CartItem.create(req.body);
@@ -13,7 +14,7 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.patch("/:id",async (req,res) => {
+router.patch("/:id", auth, async (req,res) => {
     try{
         console.log(req.body)
         await CartItem.update(req.body, {
@@ -29,7 +30,7 @@ router.patch("/:id",async (req,res) => {
 })
 
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
     try {
         const cart_items = await CartItem.findByPk(req.params.id)
         await cart_items.destroy()
