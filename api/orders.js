@@ -2,6 +2,7 @@ const router = require('express').Router();
 const {Items} = require("../db");
 const {DataTypes} = require("sequelize");
 const orders = require('express')
+const shippingInfo =require('express')
 
 router.get("/", async (req, res) => {
 
@@ -53,7 +54,7 @@ router.get("/", async (req, res) => {
             type: DataTypes,
             ref: 'User',
             required: true},
-        orderItems: ordered,
+        orderItems: orders,
         shipping: shippingInfo,
         payment: paymentInfo,
         paymentResult: {
