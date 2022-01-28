@@ -4,6 +4,24 @@ const db = require("./database")
 
 const WeFoundUser = db.define('weFoundUsers', {
 
+    username: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            notNull: true
+        }
+    },
+
+    firstName: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            notNull: true
+        }
+    },
+
     firstName: {
         type: DataTypes.STRING(50),
         allowNull: false,
