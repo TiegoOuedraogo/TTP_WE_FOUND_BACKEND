@@ -27,13 +27,13 @@ router.post("/login", async (req,
     }
 });
 
-router.post('/signup', async(req,
-                             res,next) =>
+router.post('/signup', async(req, res,next) =>
 {
     try{
         const user = await WeFoundUsers.create(req.body)
         res.status(200).send(user)
     }catch (err){
+        console.log(err)
         res.status(401).send('invalid information provided');
     }
 })
