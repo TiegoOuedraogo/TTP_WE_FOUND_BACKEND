@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const WeFoundUsers  = require("../db/weFoundUsers");
-var session = require('express-session');
+const session = require('express-session');
 
 router.post("/login", async (req,
                              res, next) => {
@@ -37,5 +37,18 @@ router.post('/signup', async(req,
         res.status(401).send('invalid information provided');
     }
 })
+
+router.delete('/logout',(req,res) => {
+   console.log(session)
+    console.log(req.session)
+    req.session.destroy((err) => {
+
+        if(err) {
+            return console.log(err);
+        }
+        res.send('successfully logged out')
+    });
+//res.end();
+});
 
 module.exports = router;
