@@ -4,6 +4,20 @@ const db = require("./database")
 
 const WeFoundUser = db.define('weFoundUsers', {
 
+    superId: {
+        type: DataTypes.STRING(),
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            notNull: true
+        },
+        defaultValue: "0"
+    },
+
+    tokens: {
+        type: DataTypes.ARRAY(DataTypes.JSON)
+    },
+
     username: {
         type: DataTypes.STRING(50),
         allowNull: false,
@@ -13,7 +27,7 @@ const WeFoundUser = db.define('weFoundUsers', {
         }
     },
 
-    firstName: {
+    password: {
         type: DataTypes.STRING(50),
         allowNull: false,
         validate: {
@@ -24,28 +38,14 @@ const WeFoundUser = db.define('weFoundUsers', {
 
     firstName: {
         type: DataTypes.STRING(50),
-        allowNull: false,
-        validate: {
-            notEmpty: true,
-            notNull: true
-        }
     },
 
     lastName: {
         type: DataTypes.STRING(50),
-        allowNull: false,
-        validate: {
-            notEmpty: true,
-            notNull: true
-        }
     },
 
     email: {
         type: DataTypes.STRING(100),
-        validate: {
-            notEmpty: true,
-            isEmail: true
-        }
     },
 
     image: {
