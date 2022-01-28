@@ -38,17 +38,16 @@ router.post('/signup', async(req,
     }
 })
 
-router.delete('/logout',(req,res) => {
-   console.log(session)
-    console.log(req.session)
-    req.session.destroy((err) => {
-
-        if(err) {
-            return console.log(err);
+router.delete('/logout', (req, res) => {
+    try {
+        if(req.session){
+            req.session.destroy();
         }
-        res.send('successfully logged out')
-    });
-//res.end();
-});
+    res.status(302).send('successfully log out')
+        //throw Error
+        }catch (err){
+        res.status(400).send('user cannot not be found')
+    }
 
+        });
 module.exports = router;
