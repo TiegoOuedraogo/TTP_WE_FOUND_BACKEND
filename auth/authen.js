@@ -1,54 +1,53 @@
 const express = require("express");
 const router = express.Router();
-const { User } = require("../api");
+const WeFoundUsers  = require("../db/weFoundUsers");
+const session = require('express-session');
 
-router.post("/login", async (req, res, next) => {
+router.post("/login", async (req,
+                             res, next) => {
     try {
-        const user = await User.findOne({ where: { email: req.body.email } });
+        const user = await WeFoundUsers.findOne(
+            {
+                where:
+                    {
+                        username: req.body.username ,
+                        password: req.body.password
+                    }
+            });
         if (!user) {
-            res.status(401).send("Wrong username and/or password");
-        }
-        else if (!user.correctPassword(req.body.password)) {
-            res.status(401).send("Wrong username and/or password");
+            throw Error
         }
         else {
-            req.login(user, err => (err ? next(err) : res.json(user)));
+            res.status(200).send(user)
         }
     }
     catch (err) {
+        res.status(401).send("Wrong username and/or password");
         next(err);
     }
 });
 
-router.post("/signup", async (req, res, next) => {
+router.post('/signup', async(req, res,next) =>
+{
+    try{
+        const user = await WeFoundUsers.create(req.body)
+        res.status(200).send(user)
+    }catch (err){
+        console.log(err)
+        res.status(401).send('invalid information provided');
+    }
+})
+
+router.delete('/logout', (req, res) => {
     try {
-        const user = await User.create(req.body);
-        req.login(user, err => (err ? next(err) : res.json(user)));
+        if(req.session){
+            req.session.destroy();
+        }
+    res.status(302).send('successfully log out')
+        //throw Error
+        }catch (err){
+        res.status(400).send('user cannot not be found')
     }
-    catch (err) {
-        if (err.name === "SequelizeUniqueConstraintError") {
-            res.status(401).send("User already exists");
-        }
-        else {
-            next(err);
-        }
-    }
-});
 
-router.delete("/logout", (req, res, next) => {
-    req.logout();
-    req.session.destroy((err) => {
-        if (err) {
-            return next(err);
-        }
-        else {
-            res.status(204).end();
-        }
-    });
-});
-
-router.get("/me", (req, res) => {
-    res.json(req.user);
-});
-
+        });
 module.exports = router;

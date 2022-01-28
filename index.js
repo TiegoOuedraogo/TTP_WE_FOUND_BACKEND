@@ -3,6 +3,7 @@ const express = require("express")
 const cors = require("cors")
 const morgan = require("morgan");
 const { db } = require('./db/index')
+const session = require('express-session')
 
 
 const app = express()
@@ -12,6 +13,12 @@ app.use(cors())
 app.use(morgan("dev"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
 
 app.use('/api', require('./api'))
 
